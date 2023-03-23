@@ -17,16 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
-});
+})->middleware();
 
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version(['v1'], function ($api) {
     $api->get('/get-session', [SessionController::class, 'getSession']);
-    $api->get('/get-permission', [
-        'uses' => [PermissionController::class, 'getPermissionByUser'],
-        'middleware' => 'permission'
-    ]);
+    $api->get('/get-permission', [PermissionController::class, 'getPermissionByUser'])
+        ->middleware('permission');
 });
 
 require __DIR__.'/auth.php';

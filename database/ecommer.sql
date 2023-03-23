@@ -16,8 +16,8 @@
 
 
 -- Dumping database structure for laravel
-CREATE DATABASE IF NOT EXISTS `laravel` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `laravel`;
+CREATE DATABASE IF NOT EXISTS `sql12607364` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `sql12607364`;
 
 -- Dumping structure for table laravel.block_permissions
 CREATE TABLE IF NOT EXISTS `block_permissions` (
@@ -47,8 +47,8 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
@@ -124,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   CONSTRAINT `FK_permissions_group_permissions` FOREIGN KEY (`group_permission_id`) REFERENCES `group_permissions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table laravel.permissions: ~0 rows (approximately)
+-- Dumping data for table laravel.permissions: ~1 rows (approximately)
 DELETE FROM `permissions`;
 INSERT INTO `permissions` (`id`, `code`, `name`, `is_active`, `group_permission_id`, `description`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
 	(1, 'TEST', 'tét', 1, NULL, NULL, '2022-12-20 09:34:51', NULL, NULL, NULL, NULL, NULL);
@@ -197,7 +197,31 @@ CREATE TABLE IF NOT EXISTS `role_permissions` (
 -- Dumping data for table laravel.role_permissions: ~1 rows (approximately)
 DELETE FROM `role_permissions`;
 INSERT INTO `role_permissions` (`id`, `role_id`, `permission_id`, `is_active`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
-	(1, 1, 1, 1, '2022-12-20 09:36:50', NULL, NULL, NULL, NULL, NULL);
+	(1, 1, 1, 0, '2022-12-20 09:36:50', NULL, NULL, NULL, NULL, NULL);
+
+-- Dumping structure for table laravel.sessions
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `session_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `ip` varchar(250) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `user_agent` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `created_by` bigint(19) DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `updated_by` bigint(19) DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `deleted_by` bigint(19) DEFAULT NULL,
+  KEY `Index 1` (`id`) USING BTREE,
+  KEY `Index 2` (`session_id`) USING BTREE,
+  KEY `Index 3` (`deleted_at`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table laravel.sessions: ~3 rows (approximately)
+DELETE FROM `sessions`;
+INSERT INTO `sessions` (`id`, `session_id`, `ip`, `user_agent`, `created_at`, `created_by`, `updated_at`, `updated_by`, `deleted_at`, `deleted_by`) VALUES
+	(19, 'eaLlT248NlNiZj3t8I3B', '127.0.0.1', 'PostmanRuntime/7.31.3', '2023-03-22 04:29:54', NULL, '2023-03-22 04:29:54', NULL, NULL, NULL),
+	(20, 'ptfDTcom9VG7WloSnexZ', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.0.0', '2023-03-22 04:33:17', NULL, '2023-03-22 04:33:17', NULL, NULL, NULL),
+	(21, 'VWhWBqhtPLYXOYJ60pOV', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.0.0', '2023-03-22 04:33:18', NULL, '2023-03-22 04:33:18', NULL, NULL, NULL);
 
 -- Dumping structure for table laravel.users
 CREATE TABLE IF NOT EXISTS `users` (

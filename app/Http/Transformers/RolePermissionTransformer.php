@@ -17,7 +17,7 @@ class RolePermissionTransformer extends TransformerAbstract
             'role_id' => $item->role_id,
             'role_name' => $item->role->name,
             'permission_id' => $item->permission_id ?? null,
-            'permission_name' => $item->permission->name,
+            'permission_name' => $item->permission->name ?? null,
             'is_active' => $item->is_active
         ];
     }

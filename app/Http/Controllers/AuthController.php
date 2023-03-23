@@ -27,18 +27,18 @@ class AuthController extends Controller
         if (!$token) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Unauthorized',
+                'message' => 'Vui lòng kiểm tra tài khoản, mật khẩu',
             ], 401);
         }
 
         $user = Auth::user();
         return response()->json([
             'status' => 'success',
-            'user' => $user,
             'message' => "Đăng nhập thành công",
             'authorisation' => [
                 'token' => $token,
                 'type' => 'bearer',
+                'user' => $user,
             ]
         ]);
     }

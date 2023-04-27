@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        // $this->middleware('auth:api', ['except' => ['login','register']]);
     }
 
     public function login(Request $request)
@@ -81,5 +81,23 @@ class AuthController extends Controller
                 'type' => 'bearer',
             ]
         ]);
+    }
+
+    public function checkToken (Request $request) {
+        $input = $request->all();
+
+        try {
+            $user = Auth::userOrFail();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => ''
+            ], 200);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Token hết hạn'
+            ], 401);
+        }
     }
 }

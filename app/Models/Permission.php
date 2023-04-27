@@ -22,4 +22,8 @@ class Permission extends BaseModel
         'deleted_at',
         'deleted_by'
     ];
+
+    public function role_permission() {
+        return $this->hasMany(RolePermission::class, 'permission_id');
+    }
 }

@@ -11,4 +11,11 @@ use Dingo\Api\Routing\Helpers;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, Helpers;
+
+
+    public function responeSuccess($message) {
+        return response()->json([
+            'message' => $message
+        ], 200);
+    }
 }
